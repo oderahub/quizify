@@ -11,11 +11,11 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     />
   </head>
-  <body>
-    <!-- start quiz button -->
-    <div class="start_btn"><button>Start Quiz</button></div>
+      <body>
+      <!-- start quiz button -->
+      <div class="start_btn"><button>Start Quiz</button></div>
 
-    <!-- info box -->
+        <!-- info box -->
      <div class="info_box">
       <div class="info_title">
         <span>Some Rules of this Quiz</span>
@@ -38,9 +38,13 @@
           <header>
             <div class="title">Awesome Quiz Application</div>
             <div class="timer">
-              <div class="timer_text">Time Left</div>
-              <div class="timer_sec">15</div>
-            </div>
+             <div class="timer_text">
+             <i class="fas fa-clock"></i> <!-- Fixed clock icon -->
+           <span>Timer</span>
+           </div>
+             <div class="timer_sec">15</div>
+           </div>
+
             <div class="time_line"></div>
        </header>
         <section>
@@ -66,9 +70,9 @@
                  <span>D. Hyper Tool Multi Language</span>
                 
             </div>
-       </div>
+          </div>
          </section>
-
+         
          <!-- footer of quiz box -->
             <footer>
                 <div class="total_que">
@@ -76,7 +80,24 @@
                 <span><p>1</p>of<p>5</p>Questions</span>
                 </div>
                 <button class="next_btn">Next Question</button>
+            </footer>
+           </div>
+            <!--result box -->
+            <div class="result_box">
+                <div class="icon">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <div class="complete_text">You've completed the Quiz!</div>
+                <div class="score_text">
+                    <span>and sorry, You got only <p>2</p>out of <p>50 </p></span>
+                </div>
 
-    <script src="index.js"></script>
+                <div class="buttons">
+                    <button class="restart">Replay Quiz</button>
+                    <button class="quit">Quit Quiz</button>
+                </div>
+            </div>
+    
+     <script src="index.js"></script>
   </body>
 </html>
