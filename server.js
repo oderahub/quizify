@@ -31,13 +31,13 @@ async function fetchQuestions(category, count) {
         console.log('API Key:', process.env.HUGGING_FACE_API_KEY ? 'Present' : 'Not found');
         const response = await hf.textGeneration({
             model: 'EleutherAI/gpt-neo-125M',  // Choose the size of the model based on your needs
-            inputs: `Generate ${count} multiple-choice quiz questions about ${category}. Each question should have 1 correct answer and 3 related but incorrect options. Format each question like this:
-- Question: What is the capital of France?
-- Options: A) Paris, B) London, C) Berlin, D) Rome
-- Answer: A`,
+            inputs: `Generate ${count} multiple-choice quiz questions about JavaScript. Each question should have 1 correct answer and 3 related but incorrect options. Focus on JavaScript concepts. Format each question like this:
+- Question: What is the purpose of the 'var' keyword in JavaScript?
+- Options: A) To declare a function, B) To declare a variable, C) To create an object, D) To define a class
+- Answer: B`,
             parameters: {
                 max_new_tokens: 500, // Adjust based on model limits and your needs
-                temperature: 0.7,
+                temperature: 0.5,
                 top_p: 0.9,
                 repetition_penalty: 1.2
             }
@@ -51,30 +51,26 @@ async function fetchQuestions(category, count) {
     }
 }
 
-/**
- * Parses the AI-generated text into an array of question objects.
- * @param {string} responseText - The text response from the AI.
- * @returns {Array} An array of parsed questions.
- */
-function parseQuestions(responseText) {
+function parseQuestions(responseText, category) {
     try {
-        // Adjust this regex based on the actual format of returned text
         const regex = /- Question: (.+?)\n- Options: (.+?)\n- Answer: ([ABCD])/g;
         let match;
         const questions = [];
 
         while ((match = regex.exec(responseText)) !== null) {
             const [, question, optionsString, correctAnswer] = match;
-            const options = optionsString.split(',').map(opt => opt.trim());
-            questions.push({
-                question: question,
-                options: options,
-                answer: options[correctAnswer.charCodeAt(0) - 'A'.charCodeAt(0)]
-            });
+            if (question.toLowerCase().includes(category.toLowerCase())) {
+                const options = optionsString.split(',').map(opt => opt.trim());
+                questions.push({
+                    question: question,
+                    options: options,
+                    answer: options[correctAnswer.charCodeAt(0) - 'A'.charCodeAt(0)]
+                });
+            }
         }
 
-        if (questions.length === 0) {
-            throw new Error("No questions were parsed from the response.");
+        if (questions.length < count) { // Assuming 'count' is available in this scope
+            console.warn("Not enough valid questions generated. Consider fallback options.");
         }
 
         return questions;
@@ -101,6 +97,7 @@ function fallbackQuestions(category, count) {
 // Quiz API route
 app.get("/quiz/:category/:count", async (req, res) => {
     const { category, count } = req.params;
+    console.log("Received category:", category);
     const questions = await fetchQuestions(category, parseInt(count));
     if (questions.length === 0) {
         res.status(500).json({ error: "Failed to retrieve or parse questions." });
