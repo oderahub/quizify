@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quizify</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Prompt -->
+    <div class="prompt_box">
+      <div class="welcome_logo">
+        <!-- Assuming you have a logo or icon for Quizify -->
+        <img src="./images/quiz.png" alt="Quizify Logo" class="logo" />
+      </div>
+      <div class="prompt_title">
+        <span>Welcome to Quizify!</span>
+      </div>
+      <div class="prompt_text">
+        <p>
+          Get ready to test your knowledge! Choose your category and set the number of questions to
+          challenge yourself.
+        </p>
+      </div>
+      <div class="next_btn"><button>Next</button></div>
+    </div>
+
+    <!-- Category selection -->
+    <div class="category_box">
+      <div class="category_title">
+        <span>Select Your Challenge</span>
+      </div>
+      <div class="category_list">
+        <button class="category" data-category="HTML">HTML</button>
+        <button class="category" data-category="CSS">CSS</button>
+        <button class="category" data-category="JavaScript">JavaScript</button>
+        <!-- Add more categories as needed -->
+      </div>
+      <div class="num_questions">
+        <label for="num_questions_input">Number of Questions:</label>
+        <input type="number" id="num_questions_input" min="1" max="50" value="5" />
+      </div>
+    </div>
+
+    <!-- Start quiz button -->
+    <div class="start_btn"><button>Start Quiz</button></div>
+
+    <!-- Info box -->
+    <div class="info_box">
+      <div class="info_title">
+        <span>Some Rules of this Quiz</span>
+        <span class="exit">X</span>
+      </div>
+      <div class="info_list">
+        <div class="info">1. You will have only <span>15 seconds</span> per each question.</div>
+        <div class="info">2. Once you select your answer, it can't be undone.</div>
+        <div class="info">3. You can't select any option once time goes off.</div>
+        <div class="info">4. You can't exit from the Quiz while you're playing.</div>
+        <div class="info">5. You'll get points on the basis of your correct answers.</div>
+      </div>
+      <div class="buttons">
+        <button class="quit">Exit Quiz</button>
+        <button class="restart">Continue</button>
+      </div>
+    </div>
+
+    <!-- Quiz box -->
+    <div class="quiz_box">
+      <header>
+        <div class="title">Awesome Quiz Application</div>
+        <div class="timer">
+          <div class="timer_text">
+            <i class="fas fa-clock"></i>
+            <span>Timer</span>
+          </div>
+          <div class="timer_sec">15</div>
+        </div>
+        <div class="time_line"></div>
+      </header>
+      <section>
+        <div class="que_text"><span>1. What does HTML stand for?</span></div>
+        <div class="option_list">
+          <div class="option">
+            <span>A. Hyper Text Markup Language</span>
+            <div class="icon tick"><i class="fas fa-check"></i></div>
+          </div>
+          <div class="option">
+            <span>B. Hyperlinks and Text Markup Process</span>
+            <div class="icon cross"><i class="fas fa-times"></i></div>
+          </div>
+          <div class="option">
+            <span>C. Hyper Text Multiple Language</span>
+          </div>
+          <div class="option">
+            <span>D. Hyper Tool Multi Language</span>
+          </div>
+        </div>
+      </section>
+      <footer>
+        <div class="total_que">
+          <span
+            ><p>1</p>
+            of
+            <p>5</p>
+            Questions</span
+          >
+        </div>
+        <button class="next_btn">Next Question</button>
+      </footer>
+    </div>
+
+    <!-- Result box -->
+    <div class="result_box">
+      <div class="icon">
+        <i class="fas fa-crown"></i>
+      </div>
+      <div class="complete_text">You've completed the Quiz!</div>
+      <div class="score_text">
+        <span
+          >and sorry, You got only
+          <p>2</p>
+          out of
+          <p>50</p></span
+        >
+      </div>
+      <div class="buttons">
+        <button class="restart">Replay Quiz</button>
+        <button class="quit">Quit Quiz</button>
+      </div>
+    </div>
+    <div
+      class="loading-overlay"
+      style="
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <div class="loader">Loading...</div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

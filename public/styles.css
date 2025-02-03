@@ -28,7 +28,8 @@ body {
 .start_btn,
 .info_box,
 .quiz_box,
-.result_box {
+.result_box,
+.prompt_box {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -383,50 +384,223 @@ footer .next_btn:hover {
   border: 1px solid var(--dark-blue);
   transition: all 0.3s ease;
 }
-
+/* Category Selection Styles */
 .category_box {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 540px;
-  background: var(--white);
-  border-radius: 1rem;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 6px 20px rgba(0, 0, 0, 0.19);
-  padding: 30px;
+  width: 600px;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  padding: 40px;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
-  opacity: 1;
-  pointer-events: auto;
-  transition: all 0.3s ease;
 }
 
 .category_title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 20px;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 30px;
   color: var(--dark-blue);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .category_list {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 10px;
+  margin-bottom: 30px;
 }
 
 .category {
   background: var(--lime-green);
   color: var(--white);
-  padding: 10px 20px;
-  border-radius: 5px;
-  border: none;
-  font-size: 16px;
+  padding: 15px 30px;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
+  outline: none;
+  border: none;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }
 
 .category:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.2);
   background: var(--bright-cyan);
+}
+
+.num_questions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+.num_questions label {
+  font-size: 1.1rem;
+  color: var(--dark-blue);
+  font-weight: 600;
+}
+
+#num_questions_input {
+  width: 60px;
+  padding: 10px;
+  border: 2px solid var(--lime-green);
+  border-radius: 5px;
+  font-size: 1rem;
+  text-align: center;
+  transition: border-color 0.3s ease;
+}
+
+#num_questions_input:focus {
+  outline: none;
+  border-color: var(--bright-cyan);
+  box-shadow: 0 0 0 2px rgba(153, 243, 243, 0.5);
+}
+/* Add these to your existing CSS */
+
+.prompt_box,
+.category_box,
+.start_btn,
+.info_box,
+.quiz_box,
+.result_box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+/* Welcome Prompt Styles */
+.prompt_box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px; /* Slightly wider for better visual appeal */
+  background-color: rgba(255, 255, 255, 0.95); /* Semi-transparent white for better readability */
+  border-radius: 15px; /* Softer corners */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  padding: 40px;
+  text-align: center;
+  opacity: 1;
+  pointer-events: auto;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcome_logo {
+  margin-bottom: 20px;
+}
+
+.welcome_logo .logo {
+  width: 100px; /* Adjust based on your logo size */
+  height: auto;
+}
+
+.prompt_title {
+  font-size: 2.5rem; /* Larger, more prominent title */
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: var(--dark-blue);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.prompt_text {
+  font-size: 1.2rem; /* Slightly larger text for better readability */
+  margin-bottom: 30px;
+  color: var(--grayish-blue);
+  line-height: 1.6;
+}
+
+.next_btn button {
+  background: var(--secondary-color);
+  color: var(--white);
+  padding: 15px 30px;
+  border-radius: 30px; /* Rounded button for modern look */
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none;
+  border: none;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.next_btn button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.2);
+  background: var(--bright-cyan); /* Change color on hover for interaction feedback */
+}
+
+.loading-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader {
+  color: white;
+  font-size: 2em;
+  text-align: center;
+}
+
+/* Spinner Animation */
+.loader::after {
+  content: '';
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Optional: Fade in animation for the overlay */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.loading-overlay {
+  animation: fadeIn 0.3s ease-out;
 }
