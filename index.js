@@ -9,6 +9,9 @@ const option_list = document.querySelector(".option_list");
 const time_line = document.querySelector(".time_line");
 const timeText = document.querySelector(".timer .timer_text");
 const timeCount = document.querySelector(".timer .timer_sec");
+const next_btn = document.querySelector("footer .next_btn");
+const bottom_ques_counter = document.querySelector("footer .total_que");
+
 
 // Quiz Questions
 const questions = [
@@ -103,8 +106,6 @@ continue_btn.onclick = () => {
     startTimer(15);
 }
 
-const next_btn = document.querySelector("footer .next_btn");
-const bottom_ques_counter = document.querySelector("footer .total_que");
 
 // If Next Question button clicked
 next_btn.onclick = () => {
@@ -215,17 +216,18 @@ function startTimer(time) {
             clearInterval(counter);
             timeText.textContent = "Time Off";
             const allOptions = option_list.children.length;
-            let correctAns = questions[que_count].answer;
 
-            for (let i = 0; i < allOptions; i++) {
-                if (option_list.children[i].textContent.trim() == correctAns) {
-                    option_list.children[i].setAttribute("class", "option correct");
-                    option_list.children[i].insertAdjacentHTML("beforeend", tickIconTag);
-                }
-            }
+            // Disable all options but don't select any
             for (let i = 0; i < allOptions; i++) {
                 option_list.children[i].classList.add("disabled");
             }
+
+            // Mark all answers as wrong if none was selected
+            for (let i = 0; i < allOptions; i++) {
+                option_list.children[i].classList.add("incorrect");
+                option_list.children[i].insertAdjacentHTML("beforeend", crossIconTag);
+            }
+
             next_btn.style.display = "block";
         }
     }
@@ -260,4 +262,33 @@ restart_quiz.onclick = () => {
 
 quit_quiz.onclick = () => {
     window.location.reload();
+}
+
+const category_box = document.querySelector(".category_box");
+const category_buttons = document.querySelectorAll(".category");
+
+// Initially show the category selection
+category_box.style.opacity = "1";
+category_box.style.pointerEvents = "auto";
+
+// Event listener for category selection
+category_buttons.forEach(button => {
+    button.addEventListener('click', function () {
+        const selectedCategory = this.getAttribute('data-category');
+        console.log('Selected category:', selectedCategory);
+        // Here you can filter questions by category if you have implemented different question sets
+        // For now, we'll just hide the category box and show the start button
+        category_box.style.opacity = "0";
+        category_box.style.pointerEvents = "none";
+        start_btn.style.display = "block"; // Assuming start_btn is hidden initially
+    });
+});
+
+// Modify start_btn click to ensure it only shows after category selection
+start_btn.onclick = () => {
+    if (start_btn.style.display !== "none") {
+        info_box.style.opacity = "1";
+        info_box.style.pointerEvents = "auto";
+        info_box.style.transform = "translate(-50%, -50%) scale(1)";
+    }
 }
